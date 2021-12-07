@@ -18,7 +18,7 @@ app.get('/api/persons', (req, res, next) => {
   Person.find({}).then(persons => {
     res.json(persons)
   })
-  .catch(error => next(error))
+    .catch(error => next(error))
 })
 
 app.get('/info', (req, res, next) => {
@@ -57,7 +57,7 @@ app.put('/api/persons/:id', (request, response, next) => {
 
 app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndRemove(request.params.id)
-    .then(result => {
+    .then(() => {
       response.status(204).end()
     })
     .catch(error => next(error))
@@ -67,7 +67,7 @@ app.post('/api/persons', (request, response, next) => {
   const body = request.body
 
   if (!body.name || !body.number) {
-    return response.status(400).json({ 
+    return response.status(400).json({
       error: 'Name or number missing'
     })
   }
@@ -80,7 +80,7 @@ app.post('/api/persons', (request, response, next) => {
   person.save().then(savedPerson => {
     response.json(savedPerson.toJSON())
   })
-  .catch(error => next(error))
+    .catch(error => next(error))
 })
 
 const unknownEndpoint = (request, response) => {
